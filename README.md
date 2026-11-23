@@ -6,6 +6,10 @@ Additionally, the program slightly modifies Discord's outgoing UDP traffic, whic
 
 The program works locally at the specific process level (without drivers) and does not affect the operating system globally. This approach serves as an alternative to using a global VPN (such as TUN interfaces and others).
 
+## iOS
+
+The [standalone iOS app](ios/README.md) uses a user-supplied IKEv2 VPN to carry Discord traffic, including voice UDP. It does not modify Discord or use the Windows Direct mode.
+
 ## Installation
 
 The latest version of the program can be downloaded from the [latest release page](https://github.com/hdrover/discord-drover/releases/latest).
