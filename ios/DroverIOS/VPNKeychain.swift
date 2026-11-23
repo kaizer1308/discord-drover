@@ -25,9 +25,14 @@ enum VPNKeychain {
         SecItemDelete([kSecValuePersistentRef as String: reference] as CFDictionary)
     }
 
-    private struct KeychainError: LocalizedError {
+    struct KeychainError: LocalizedError {
         let status: OSStatus
 
-        var errorDescription: String? { "Could not save the VPN credential (Keychain error \(status))." }
+        var errorDescription: String? {
+            if status == errSecMissingEntitlement {
+                return "Keychain access is unavailable. Sign the app with a provisioning profile that includes its Keychain access group and Personal VPN."
+            }
+            return "Could not save the VPN credential (Keychain error \(status))."
+        }
     }
 }

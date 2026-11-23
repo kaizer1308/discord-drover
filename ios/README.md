@@ -5,7 +5,7 @@ Discord Drover is a standalone iOS 17+ app for using the official Discord app ov
 ## Install on an iPhone or iPad
 
 1. Open `DroverIOS.xcodeproj` in Xcode on a Mac. In the **DroverIOS** target’s **Signing & Capabilities**, select a development team and replace `com.example.discord-drover-ios` with a unique bundle identifier.
-2. Ensure the App ID and provisioning profile include the **Personal VPN** capability. The app ships with the `com.apple.developer.networking.vpn.api` entitlement (`allow-vpn`). Build and run on a physical device.
+2. Ensure the App ID and provisioning profile include the **Personal VPN** entitlement (`com.apple.developer.networking.vpn.api` with `allow-vpn`) and allow the app's `keychain-access-groups` entry. Xcode expands `$(AppIdentifierPrefix)$(PRODUCT_BUNDLE_IDENTIFIER)` when signing. If re-signing an unsigned IPA manually, use the profile's actual App ID prefix (including its trailing period) and the final bundle ID, not the literal build-setting variables. Build and run on a physical device.
 3. Enter the IKEv2 **server address** and the **remote ID** given by your VPN provider. For username/password (EAP) authentication, use a server with a trusted certificate matching the remote ID. If the server is set up for IKEv2 pre-shared-key authentication, select **Pre-shared key** instead. There is no built-in server or account.
 4. Tap **Connect**, approve the iOS VPN configuration prompt, and wait for **Connected**, then open Discord and join a voice channel. The app stores the credential in the device Keychain; leave the credential field blank to keep the saved value when reusing the same authentication method. Tap **Disconnect** when finished; this also turns off on-demand connection.
 

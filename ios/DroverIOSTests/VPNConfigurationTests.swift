@@ -1,4 +1,5 @@
 import NetworkExtension
+import Security
 import XCTest
 @testable import DroverIOS
 
@@ -67,5 +68,14 @@ final class VPNConfigurationTests: XCTestCase {
             "discord.com", "discordapp.com", "discord.gg", "discord.media",
             "discordapp.net", "discordcdn.com", "discord.co", "gateway.discord.gg",
         ])
+    }
+
+    func testKeychainErrorDistinguishesMissingSigningEntitlement() {
+        let signingError = VPNKeychain.KeychainError(status: errSecMissingEntitlement)
+        XCTAssertTrue(signingError.localizedDescription.contains("provisioning profile"))
+        XCTAssertTrue(signingError.localizedDescription.contains("Keychain access group"))
+
+        let genericError = VPNKeychain.KeychainError(status: errSecInternalError)
+        XCTAssertTrue(genericError.localizedDescription.contains("\(errSecInternalError)"))
     }
 }
